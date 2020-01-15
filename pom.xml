@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.qwwaq.ticket</groupId>
-    <artifactId>qwwaq-ticket-parent</artifactId>
+    <groupId>com.line.ticket</groupId>
+    <artifactId>line-ticket-parent</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
@@ -17,15 +17,17 @@
 
     <properties>
         <project-java.version>11</project-java.version>
-        <qwwaq-ticket-console.version>0.0.1-SNAPSHOT</qwwaq-ticket-console.version>
+        <line-ticket-console.version>0.0.1-SNAPSHOT</line-ticket-console.version>
+        <line-ticket-common.version>0.0.1-SNAPSHOT</line-ticket-common.version>
+        <line-ticket-service.version>0.0.1-SNAPSHOT</line-ticket-service.version>
         <mybatis-spring-boot-starter.version>2.1.1</mybatis-spring-boot-starter.version>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <dubbo.version>2.7.5</dubbo.version>
     </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>${mybatis-spring-boot-starter.version}</version>
-        </dependency>
-    </dependencies>
+    <modules>
+        <module>line-ticket-common</module>
+        <module>line-ticket-console</module>
+        <module>line-ticket-service</module>
+    </modules>
 </project>
