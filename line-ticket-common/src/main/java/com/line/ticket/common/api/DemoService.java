@@ -5,9 +5,9 @@ import com.line.ticket.common.entity.Demo;
 public interface DemoService {
     boolean addDemo(Demo demo);
 
-    boolean deleteDemo(int id);
+    boolean deleteDemo(Integer id);
 
-    Demo selectDemo(int id);
+    Demo selectDemo(Integer id);
 
     boolean updateDemo(Demo demo);
 }

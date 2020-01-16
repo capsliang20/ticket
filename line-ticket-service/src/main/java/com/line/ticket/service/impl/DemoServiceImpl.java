@@ -22,12 +22,12 @@ public class DemoServiceImpl implements DemoService {
     }
 
     @Override
-    public boolean deleteDemo(int id) {
+    public boolean deleteDemo(Integer id) {
         return demoMapper.deleteDemo(id) == 1;
     }
 
     @Override
-    public Demo selectDemo(int id) {
+    public Demo selectDemo(Integer id) {
         return demoMapper.selectDemo(id);
     }
 

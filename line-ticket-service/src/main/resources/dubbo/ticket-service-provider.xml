@@ -1,15 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
 
+    <!-- dubbo-admin ui开放端口为9090, dubbo-admin-server为9080 -->
     <dubbo:application name="ticket-service-provider"/>
-    <dubbo:metadata-report address="zookeeper://39.108.225.165:2181"/>
-    <dubbo:config-center address="zookeeper://39.108.225.165:2181"/>
-    <dubbo:registry address="zookeeper://39.108.225.165:2181" simplified="true"/>
+    <dubbo:metadata-report address="zookeeper://39.108.225.165:2181" timeout="20000"/>
+    <dubbo:config-center address="zookeeper://39.108.225.165:2181" timeout="20000"/>
+    <dubbo:registry address="zookeeper://39.108.225.165:2181" timeout="20000"/>
 
-    <dubbo:protocol name="dubbo" port="20890"/>
+<!--    <dubbo:metadata-report address="zookeeper://127.0.0.1:2181" timeout="20000"/>-->
+<!--    <dubbo:config-center address="zookeeper://127.0.0.1:2181" timeout="20000"/>-->
+<!--    <dubbo:registry address="zookeeper://127.0.0.1:2181" timeout="20000"/>-->
+
+    <dubbo:protocol name="dubbo" port="20800"/>
 
     <bean id="demoServiceImpl" class="com.line.ticket.service.impl.DemoServiceImpl"/>
     <dubbo:service interface="com.line.ticket.common.api.DemoService" ref="demoServiceImpl"/>
