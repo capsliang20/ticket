@@ -1,0 +1,6 @@
+2020-01-17 16:43:33,205 ERROR c.l.t.l.m.Bar [main] bar error level
+2020-01-17 16:43:33,212 ERROR c.l.t.l.m.MyApp [main] error !
+2020-01-17 16:43:43,213 ERROR c.l.t.l.m.Bar [main] bar error level
+2020-01-17 16:43:43,213 ERROR c.l.t.l.m.MyApp [main] error !
+2020-01-17 16:44:10,785 ERROR c.l.t.l.m.Bar [main] bar error level
+2020-01-17 16:44:10,800 ERROR c.l.t.l.m.MyApp [main] error !
