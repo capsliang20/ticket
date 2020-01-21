@@ -31,6 +31,9 @@
         </Async>
     </Appenders>
     <Loggers>
+        <logger name="testttt" additivity="false" level="WARN">
+            <AppenderRef ref="console"/>
+        </logger>
         <Root level="error">
             <AppenderRef ref="Async"/>
         </Root>

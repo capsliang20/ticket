@@ -2,7 +2,7 @@ package com.line.ticket.log.mainclass;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
+@Slf4j(topic = "testttt")
 public class MyApp {
     public static void main(String[] args) throws InterruptedException {
         Bar bar = new Bar();
