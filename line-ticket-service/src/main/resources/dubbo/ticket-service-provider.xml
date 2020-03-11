@@ -15,4 +15,16 @@
 
     <bean id="demoServiceImpl" class="com.line.ticket.service.impl.DemoServiceImpl"/>
     <dubbo:service interface="com.line.ticket.common.api.DemoService" ref="demoServiceImpl"/>
+
+<!--    <dubbo:service interface=""/> 用于暴露一个服务-->
+<!--    <dubbo:reference interface=""/> 用于创建一个远程服务代理-->
+<!--    <dubbo:protocol/> 用于配置提供服务的协议信息-->
+<!--    <dubbo:application name=""/> 用于配置当前应用信息-->
+<!--    <dubbo:module name=""/> 用于配置当前模块信息-->
+<!--    <dubbo:registry/> 用于配置连接注册中心相关信息-->
+<!--    <dubbo:monitor/> 用于配置连接监控中心相关信息-->
+<!--    <dubbo:provider/> 可选-->
+<!--    <dubbo:consumer/> 可选-->
+<!--    <dubbo:method name=""/> 用于指定方法级的配置信息-->
+<!--    <dubbo:argument/> 用于指定方法参数配置-->
 </beans>
