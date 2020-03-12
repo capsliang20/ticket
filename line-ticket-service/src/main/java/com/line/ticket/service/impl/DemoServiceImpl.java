@@ -15,7 +15,6 @@ public class DemoServiceImpl implements DemoService {
     @Resource
     DemoMapper demoMapper;
 
-
     @Override
     public boolean addDemo(Demo demo) {
         return demoMapper.insertDemo(demo) == 1;

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn" name="MyApp" packages="">
+    <Appenders>
+        <Async name="">
+
+        </Async>
+    </Appenders>
+    <Loggers></Loggers>
+</Configuration>

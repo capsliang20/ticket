@@ -2,22 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.line.ticket.service.mapper.DemoMapper">
     <resultMap id="demoResultMap" type="com.line.ticket.common.entity.Demo">
-        <id column="id" jdbcType="TINYINT" property="id" javaType="int"/>
+        <id column="id" jdbcType="INTEGER" property="id" javaType="int"/>
         <result column="name" jdbcType="VARCHAR" property="name" javaType="string"/>
         <result column="phone_number" jdbcType="CHAR" property="phoneNumber" javaType="string"/>
         <result column="sex" jdbcType="TINYINT" property="sex" javaType="int"/>
         <result column="birthday" jdbcType="DATE" property="birthday" javaType="java.time.LocalDate"/>
         <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime"
                 javaType="java.time.LocalDateTime"/>
-
     </resultMap>
 
     <sql id="demo_column">
         name,phone_number,sex,birthday,last_update_time
     </sql>
 
-
-    <select id="selectDemo" resultMap="demoResultMap" parameterType="integer">
+    <select id="selectDemo" resultMap="demoResultMap" parameterType="int">
         select id,
         <include refid="demo_column"/>
         from demo where id=#{id}
@@ -34,10 +32,8 @@
         (#{name},#{phoneNumber},#{sex},#{birthday},#{lastUpdateTime})
     </insert>
 
-    <delete id="deleteDemo" parameterType="integer">
+    <delete id="deleteDemo" parameterType="int">
         delete from demo where id=#{id}
-
-
     </delete>
 </mapper>
 
