@@ -1,10 +1,13 @@
 package com.line.ticket.service;
 
 import com.line.ticket.common.api.DemoService;
-import com.line.ticket.common.entity.Ticket;
-import com.line.ticket.common.entity.User;
+import com.line.ticket.common.api.TicketService;
+import com.line.ticket.common.api.UserService;
+import com.line.ticket.common.entity.generic.Pair;
 import com.line.ticket.common.util.JSON;
+import com.line.ticket.service.mapper.DemoMapper;
 import com.line.ticket.service.mapper.TicketMapper;
+import com.line.ticket.service.mapper.TicketOrderMapper;
 import com.line.ticket.service.mapper.UserMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -26,13 +29,19 @@ class LineTicketServiceApplicationTests {
     @Resource
     private TicketMapper ticketMapper;
 
+    @Resource
+    private TicketOrderMapper orderMapper;
+
+    @Resource
+    private DemoMapper demoMapper;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private TicketService ticketService;
+
     @Test
     void contextLoads() {
-        Integer id = userMapper.verifyLogin("qwwaq@qq.com", "liang1998");
-        log.info("correct login :{}", id);
-        User user = userMapper.getUserLoginInfo(id);
-        log.info("login user info :{}", JSON.toJSONString(user));
-        Ticket ticket = ticketMapper.getTicketInfo(1);
-        log.info("ticket info: {}", JSON.toJSONString(ticket));
     }
 }

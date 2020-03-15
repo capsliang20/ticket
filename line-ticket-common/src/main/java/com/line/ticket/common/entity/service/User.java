@@ -1,4 +1,4 @@
-package com.line.ticket.common.entity;
+package com.line.ticket.common.entity.service;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;

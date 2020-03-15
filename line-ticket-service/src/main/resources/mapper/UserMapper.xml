@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.line.ticket.service.mapper.UserMapper">
 
-    <resultMap id="userInfoMap" type="com.line.ticket.common.entity.User">
+    <resultMap id="userInfoMap" type="com.line.ticket.common.entity.service.User">
         <id column="id" jdbcType="INTEGER" property="id" javaType="int"/>
         <result column="name" jdbcType="VARCHAR" property="name" javaType="string"/>
         <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber" javaType="string"/>
@@ -12,12 +12,12 @@
     </resultMap>
 
     <select id="verifyLogin" resultType="int">
-        select id from user where account=#{account} and password=#{password}
+        select id from user where account = #{account} and password = #{password}
     </select>
 
     <select id="getUserLoginInfo" resultMap="userInfoMap">
         select id, name, phone_number, email, sex, birthday
-        from user where id =#{id}
+        from user where id = #{id}
     </select>
 
 </mapper>
