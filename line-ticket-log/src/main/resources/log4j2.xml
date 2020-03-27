@@ -1,40 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="warn" name="MyApp" >
+<Configuration status="warn" name="line-ticket-log" packages="">
     <Appenders>
-        <File name="file" fileName="line-ticket-log/logs/app.log">
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout>
+                <Pattern>%d %p [%t] %logger - %m%n</Pattern>
+            </PatternLayout>
+        </Console>
+        <File name="ConsoleFile" fileName="line-ticket-log/logs/ConsoleFile.log" append="false">
             <PatternLayout>
                 <Pattern>%d %p [%t] %logger - %m%n</Pattern>
             </PatternLayout>
         </File>
-
-        <Console name="console" target="SYSTEM_OUT">
-            <JsonLayout properties="true"/>
-        </Console>
-
-        <RollingFile name="rollingFile" fileName="line-ticket-log/logs/rollApp.log"
+        <RollingFile name="RollingFile" fileName="line-ticket-log/logs/RollingFile.log" append="true"
                      filePattern="line-ticket-log/logs/$${date:yyyy-MM-dd}/rollApp-%d{yyyy-MM-dd}_%i.log.gz">
             <PatternLayout>
                 <Pattern>%d %p [%t] %logger - %m%n</Pattern>
             </PatternLayout>
             <Policies>
                 <OnStartupTriggeringPolicy/>
-                <TimeBaseTriggeringPolicy interval="6" modulate="true"/>
-                <SizeBasedTriggeringPolicy size="250 KB"/>
+                <TimeBasedTriggeringPolicy interval="12" modulate="true"/>
+                <SizeBasedTriggeringPolicy  size="250 KB"/>
             </Policies>
             <DefaultRolloverStrategy max="10"/>
         </RollingFile>
-
         <Async name="Async">
-<!--            <AppenderRef ref="file"/>-->
-<!--            <AppenderRef ref="rollingFile"/>-->
-            <AppenderRef ref="console"/>
+            <AppenderRef ref="ConsoleFile"/>
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RollingFile"/>
         </Async>
     </Appenders>
     <Loggers>
-        <logger name="testttt" additivity="false" level="WARN">
-            <AppenderRef ref="console"/>
-        </logger>
-        <Root level="error">
+        <Root level="INFO">
             <AppenderRef ref="Async"/>
         </Root>
     </Loggers>

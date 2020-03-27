@@ -3,6 +3,7 @@ package com.line.ticket.service.impl;
 import com.line.ticket.common.api.DemoService;
 import com.line.ticket.common.entity.Demo;
 import com.line.ticket.service.mapper.DemoMapper;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +27,7 @@ public class DemoServiceImpl implements DemoService {
     }
 
     @Override
+    @Cacheable(cacheNames = {"demo"},key = "#id")
     public Demo selectDemo(Integer id) {
         return demoMapper.selectDemo(id);
     }

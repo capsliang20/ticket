@@ -1,9 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="warn" name="MyApp" packages="">
+<Configuration status="warn" name="MyApp" >
     <Appenders>
-        <Async name="">
+        <File name="file" fileName="line-ticket-log/logs/app.log">
+            <PatternLayout>
+                <Pattern>%d %p [%t] %logger - %m%n</Pattern>
+            </PatternLayout>
+        </File>
 
+        <Console name="console" target="SYSTEM_OUT">
+            <JsonLayout properties="true"/>
+        </Console>
+
+        <RollingFile name="rollingFile" fileName="line-ticket-log/logs/rollApp.log"
+                     filePattern="line-ticket-log/logs/$${date:yyyy-MM-dd}/rollApp-%d{yyyy-MM-dd}_%i.log.gz">
+            <PatternLayout>
+                <Pattern>%d %p [%t] %logger - %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <OnStartupTriggeringPolicy/>
+                <TimeBaseTriggeringPolicy interval="6" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="250 KB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+
+        <Async name="Async">
+            <!--            <AppenderRef ref="file"/>-->
+            <!--            <AppenderRef ref="rollingFile"/>-->
+            <AppenderRef ref="console"/>
         </Async>
     </Appenders>
-    <Loggers></Loggers>
+    <Loggers>
+        <logger name="testttt" additivity="false" level="WARN">
+            <AppenderRef ref="console"/>
+        </logger>
+        <Root level="error">
+            <AppenderRef ref="Async"/>
+        </Root>
+    </Loggers>
 </Configuration>

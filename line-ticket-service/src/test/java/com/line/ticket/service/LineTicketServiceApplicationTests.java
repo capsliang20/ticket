@@ -3,8 +3,6 @@ package com.line.ticket.service;
 import com.line.ticket.common.api.DemoService;
 import com.line.ticket.common.api.TicketService;
 import com.line.ticket.common.api.UserService;
-import com.line.ticket.common.entity.generic.Pair;
-import com.line.ticket.common.util.JSON;
 import com.line.ticket.service.mapper.DemoMapper;
 import com.line.ticket.service.mapper.TicketMapper;
 import com.line.ticket.service.mapper.TicketOrderMapper;
