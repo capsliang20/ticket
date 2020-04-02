@@ -31,6 +31,7 @@
         <mybatis-spring-boot-starter.version>2.1.1</mybatis-spring-boot-starter.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <dubbo.version>2.7.3</dubbo.version>
+        <mybatis-spring-boot-starter-test.version>2.1.1</mybatis-spring-boot-starter-test.version>
     </properties>
 
     <modules>
