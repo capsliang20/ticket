@@ -1,7 +1,7 @@
 package com.line.ticket.console;
 
 import com.line.ticket.common.entity.generic.Pair;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InOrder;
 

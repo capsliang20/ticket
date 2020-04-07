@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="warn" name="MyApp" >
+<Configuration status="warn" name="MyApp">
     <Appenders>
         <Console name="console" target="SYSTEM_OUT">
             <PatternLayout>
                 <Pattern>%d %p [%t] %logger - %m%n</Pattern>
             </PatternLayout>
         </Console>
+        <File name="consoleFile" fileName="logs/consoleFile.log" append="true">
+            <PatternLayout>
+                <Pattern>%d %p [%t] %logger - %m%n</Pattern>
+            </PatternLayout>
+        </File>
+        <Async name="Async">
+            <AppenderRef ref="console"/>
+            <AppenderRef ref="consoleFile"/>
+        </Async>
     </Appenders>
     <Loggers>
-        <Root level="INFO">
-            <AppenderRef ref="console"/>
+        <Root level="DEBUG">
+            <AppenderRef ref="Async"/>
         </Root>
     </Loggers>
 </Configuration>

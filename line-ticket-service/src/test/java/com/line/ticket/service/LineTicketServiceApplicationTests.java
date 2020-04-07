@@ -3,6 +3,9 @@ package com.line.ticket.service;
 import com.line.ticket.common.api.DemoService;
 import com.line.ticket.common.api.TicketService;
 import com.line.ticket.common.api.UserService;
+import com.line.ticket.common.entity.generic.Result;
+import com.line.ticket.common.entity.service.User;
+import com.line.ticket.common.util.JSON;
 import com.line.ticket.service.mapper.DemoMapper;
 import com.line.ticket.service.mapper.TicketMapper;
 import com.line.ticket.service.mapper.TicketOrderMapper;
@@ -41,5 +44,7 @@ class LineTicketServiceApplicationTests {
 
     @Test
     void contextLoads() {
+        Result<User> user = userService.login("qwwaq@qq.com", "liang1998");
+        log.debug("user: {}", JSON.toJSONString(user));
     }
 }
