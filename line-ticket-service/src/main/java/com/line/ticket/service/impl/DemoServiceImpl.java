@@ -27,7 +27,7 @@ public class DemoServiceImpl implements DemoService {
     }
 
     @Override
-    @Cacheable(cacheNames = {"demo"},key = "#id")
+    @Cacheable(cacheNames = {"demo"}, key = "#id")
     public Demo selectDemo(Integer id) {
         return demoMapper.selectDemo(id);
     }
