@@ -18,7 +18,6 @@ public class KafkaProducerCase {
         KafkaProducer<String, String> producer = new KafkaProducer(kafkaProps);
         for (int i = 0; i < 5; i++) {
             User user = new User("user_" + i, i + 5, "color_" + i);
-
             ProducerRecord<String, String> record = new ProducerRecord<>(MQConstant.CASE_TOPIC, "key_" + i, "Now it is value " + i);
             RecordMetadata result = producer.send(record).get();
             System.out.println("record: " + i);
