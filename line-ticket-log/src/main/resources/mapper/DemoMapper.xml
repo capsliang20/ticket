@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.line.ticket.service.mapper.DemoMapper">
+    <resultMap id="demoResultMap" type="com.line.ticket.common.entity.Demo">
+        <id column="id" jdbcType="INTEGER" property="id" javaType="int"/>
+        <result column="name" jdbcType="VARCHAR" property="name" javaType="string"/>
+        <result column="phone_number" jdbcType="CHAR" property="phoneNumber" javaType="string"/>
+        <result column="sex" jdbcType="TINYINT" property="sex" javaType="int"/>
+        <result column="birthday" jdbcType="DATE" property="birthday" javaType="java.time.LocalDate"/>
+        <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime"
+                javaType="java.time.LocalDateTime"/>
+    </resultMap>
+
+    <sql id="demo_column">
+        name,phone_number,sex,birthday,last_update_time
+    </sql>
+
+    <select id="selectDemo" resultMap="demoResultMap" parameterType="int">
+        select id,
+        <include refid="demo_column"/>
+        from demo where id=#{id}
+    </select>
+
+    <update id="updateDemo" parameterType="com.line.ticket.common.entity.Demo">
+        update demo set name=#{name},phone_number=#{phoneNumber},sex=#{sex},
+        birthday=#{birthday},last_update_time=#{lastUpdateTime} where id=#{id}
+    </update>
+
+    <insert id="insertDemo" useGeneratedKeys="true" keyColumn="id" keyProperty="id"
+            parameterType="com.line.ticket.common.entity.Demo">
+        insert into demo (<include refid="demo_column"/>) value
+        (#{name},#{phoneNumber},#{sex},#{birthday},#{lastUpdateTime})
+    </insert>
+
+    <delete id="deleteDemo" parameterType="int">
+        delete from demo where id=#{id}
+    </delete>
+</mapper>
+
+
+        <!--        <association property="birthday" fetchType="lazy"/>-->
+        <!--    <cache eviction="LRU" flushInterval="100000" size="1024" readOnly="true"/>-->
+        <!--<if test="id!=null and id!=''"></if>-->
+        <!--<choose>-->
+        <!--<when test="id!=null and id!=''"></when>-->
+        <!--<when test="id!=null and id!=''"></when>-->
+        <!--<otherwise></otherwise>-->
+        <!--</choose>-->

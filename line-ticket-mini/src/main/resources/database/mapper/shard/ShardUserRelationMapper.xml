@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.line.ticket.mini.mapper.shard.ShardUserRelationMapper">
+    <resultMap id="shardUserRelationResultMap" type="com.line.ticket.mini.model.shard.ShardUserRelation">
+        <id column="id" jdbcType="BIGINT" property="id" javaType="long"/>
+        <result column="user_id" jdbcType="BIGINT" property="userId" javaType="long"/>
+        <result column="user_account" jdbcType="VARCHAR" property="userAccount" javaType="string"/>
+        <result column="user_password" jdbcType="VARCHAR" property="userPassword" javaType="string"/>
+        <result column="area_code" jdbcType="INTEGER" property="areaCode" javaType="int"/>
+    </resultMap>
+
+    <select id="queryUserRelation" resultMap="shardUserRelationResultMap">
+        select id, user_id, user_account, user_password, area_code from ds.user_relation
+        where user_id = #{userId} and area_code = #{areaCode}
+    </select>
+
+    <insert id="addUserRelation" parameterType="com.line.ticket.mini.model.shard.ShardUserRelation"
+            useGeneratedKeys="true"
+            keyColumn="id" keyProperty="id">
+        insert into ds.user_relation (user_id, user_account, user_password, area_code)
+        values (#{userId}, #{userAccount}, #{userPassword}, #{areaCode});
+    </insert>
+
+    <delete id="removeUserRelations">
+        delete from ds.user_relation where user_id = #{userId} and area_code = #{areaCode}
+    </delete>
+
+</mapper>

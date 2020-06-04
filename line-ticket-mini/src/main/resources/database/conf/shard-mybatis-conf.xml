@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:sharding="http://shardingsphere.apache.org/schema/shardingsphere/sharding"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd
+       http://shardingsphere.apache.org/schema/shardingsphere/sharding
+       http://shardingsphere.apache.org/schema/shardingsphere/sharding/sharding.xsd">
+
+    <context:property-placeholder location="/properties/jdbc.properties"/>
+
+    <bean id="ds0" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${shard0.datasource.driver-class-name}"/>
+        <property name="url" value="${shard0.datasource.url}"/>
+        <property name="username" value="${shard0.datasource.username}"/>
+        <property name="password" value="${shard0.datasource.password}"/>
+    </bean>
+
+    <bean id="ds1" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${shard1.datasource.driver-class-name}"/>
+        <property name="url" value="${shard1.datasource.url}"/>
+        <property name="username" value="${shard1.datasource.username}"/>
+        <property name="password" value="${shard1.datasource.password}"/>
+    </bean>
+
+    <bean id="ds2" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${shard2.datasource.driver-class-name}"/>
+        <property name="url" value="${shard2.datasource.url}"/>
+        <property name="username" value="${shard2.datasource.username}"/>
+        <property name="password" value="${shard2.datasource.password}"/>
+    </bean>
+
+    <bean id="ds3" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${shard3.datasource.driver-class-name}"/>
+        <property name="url" value="${shard3.datasource.url}"/>
+        <property name="username" value="${shard3.datasource.username}"/>
+        <property name="password" value="${shard3.datasource.password}"/>
+    </bean>
+
+    <bean id="simpleStringPreciseShardingAlgorithm"
+          class="com.line.ticket.mini.config.shard.StringPreciseShardingAlgorithm"/>
+
+    <bean id="simpleLongPreciseShardingAlgorithm"
+          class="com.line.ticket.mini.config.shard.LongPreciseShardingAlgorithm"/>
+
+    <sharding:inline-strategy id="demoDatabaseStrategy" sharding-column="area_code"
+                              algorithm-expression="ds$->{area_code%2}"/>
+
+    <sharding:standard-strategy id="demoTableStrategy" sharding-column="id"
+                                precise-algorithm-ref="simpleLongPreciseShardingAlgorithm"/>
+
+    <sharding:inline-strategy id="userDatabaseStrategy" sharding-column="area_code"
+                              algorithm-expression="ds$->{area_code%4}"/>
+
+    <sharding:standard-strategy id="userTableStrategy" sharding-column="id"
+                                precise-algorithm-ref="simpleLongPreciseShardingAlgorithm"/>
+
+    <sharding:inline-strategy id="userRelationDatabaseStrategy" sharding-column="area_code"
+                              algorithm-expression="ds$->{area_code%4}"/>
+
+    <sharding:standard-strategy id="userRelationTableStrategy" sharding-column="user_id"
+                                precise-algorithm-ref="simpleLongPreciseShardingAlgorithm"/>
+
+    <sharding:none-strategy id="noneStrategy"/>
+
+    <sharding:key-generator id="idSnowGenerator" column="id" type="SNOWFLAKE"/>
+
+    <sharding:data-source id="shardDataSource">
+        <sharding:sharding-rule data-source-names="ds0,ds1,ds2,ds3">
+            <sharding:table-rules>
+                <sharding:table-rule logic-table="demo_info" actual-data-nodes="ds$->{0..1}.demo_info$->{0..7}"
+                                     database-strategy-ref="demoDatabaseStrategy"
+                                     table-strategy-ref="demoTableStrategy"
+                                     key-generator-ref="idSnowGenerator"/>
+                <sharding:table-rule logic-table="user_info" actual-data-nodes="ds$->{0..3}.user_info$->{0..7}"
+                                     database-strategy-ref="userDatabaseStrategy"
+                                     table-strategy-ref="userTableStrategy"
+                                     key-generator-ref="idSnowGenerator"/>
+                <sharding:table-rule logic-table="user_relation" actual-data-nodes="ds$->{0..3}.user_relation$->{0..7}"
+                                     database-strategy-ref="userRelationDatabaseStrategy"
+                                     table-strategy-ref="userRelationTableStrategy"
+                                     key-generator-ref="idSnowGenerator"/>
+                <sharding:table-rule logic-table="area" actual-data-nodes="ds$->{0..3}.area"
+                                     database-strategy-ref="noneStrategy"
+                                     table-strategy-ref="noneStrategy"/>
+            </sharding:table-rules>
+            <sharding:broadcast-table-rules>
+                <sharding:broadcast-table-rule table="area"/>
+            </sharding:broadcast-table-rules>
+            <sharding:binding-table-rules>
+                <sharding:binding-table-rule logic-tables="user_info, user_relation"/>
+            </sharding:binding-table-rules>
+        </sharding:sharding-rule>
+    </sharding:data-source>
+
+    <bean id="shardSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="shardDataSource"/>
+        <property name="mapperLocations" value="/database/mapper/shard/*Mapper.xml"/>
+    </bean>
+
+    <bean id="shardSqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="shardSqlSessionFactory"/>
+    </bean>
+
+    <bean id="shardMapperFactoryBean" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionTemplateBeanName" value="shardSqlSession"/>
+        <property name="basePackage" value="com.line.ticket.mini.mapper.shard"/>
+    </bean>
+</beans>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder  location="/properties/jdbc.properties"/>
+
+    <bean id="singleDatasource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${default.datasource.driver-class-name}"/>
+        <property name="url" value="${default.datasource.url}"/>
+        <property name="username" value="${default.datasource.username}"/>
+        <property name="password" value="${default.datasource.password}"/>
+    </bean>
+
+    <bean id="singleSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="singleDatasource"/>
+        <property name="mapperLocations" value="/database/mapper/single/*Mapper.xml"/>
+    </bean>
+
+    <bean id="singleSqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="singleSqlSessionFactory"/>
+    </bean>
+
+    <bean id="singleMapperFactoryBean" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionTemplateBeanName" value="singleSqlSession"/>
+        <property name="basePackage" value="com.line.ticket.mini.mapper.single"/>
+    </bean>
+</beans>
