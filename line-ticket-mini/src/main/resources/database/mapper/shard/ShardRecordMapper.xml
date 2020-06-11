@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.line.ticket.mini.mapper.shard.ShardRecordMapper">
+    <resultMap id="shardRecordResultMap" type="com.line.ticket.mini.model.shard.Record">
+        <result column="id" jdbcType="BIGINT" property="id" javaType="long"/>
+        <result column="content" jdbcType="VARCHAR" property="content" javaType="string"/>
+        <result column="date_num" jdbcType="INTEGER" property="dateNum" javaType="int"/>
+        <result column="type" jdbcType="INTEGER" property="type" javaType="int"/>
+    </resultMap>
+
+    <select id="queryRecord" resultMap="shardRecordResultMap">
+        select id, content, date_num, `type` from ds.user_record where id = #{id} and date_num = #{dateNum}
+    </select>
+
+    <insert id="coverRecord" parameterType="com.line.ticket.mini.model.shard.Record">
+        insert into ds.user_record (`id`, content, date_num, `type`)
+        values (#{id}, #{content}, #{dateNum}, #{type})
+        on duplicate key update content = values (content), date_num = values (date_num), `type` = values (`type`)
+    </insert>
+
+    <delete id="removeRecord">
+        delete from ds.user_record where id=#{id} and date_num = #{dateNum}
+    </delete>
+</mapper>

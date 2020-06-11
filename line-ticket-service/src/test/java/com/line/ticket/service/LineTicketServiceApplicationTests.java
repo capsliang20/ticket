@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
+import java.util.Map;
 
 @SpringBootTest
 @Slf4j
@@ -44,6 +45,7 @@ class LineTicketServiceApplicationTests {
 
     @Test
     void contextLoads() {
+        Result<Map<String, String>> result = Result.success();
         Result<User> user = userService.login("qwwaq@qq.com", "liang1998");
         log.debug("user: {}", JSON.toJSONString(user));
     }

@@ -1,12 +1,9 @@
 package com.line.ticket.mini;
 
-import com.line.ticket.mini.mapper.shard.ShardAreaMapper;
-import com.line.ticket.mini.mapper.shard.ShardDemoMapper;
-import com.line.ticket.mini.mapper.shard.ShardUserMapper;
-import com.line.ticket.mini.mapper.shard.ShardUserRelationMapper;
+import com.line.ticket.mini.mapper.shard.*;
 import com.line.ticket.mini.mapper.single.SingleDemoMapper;
-import com.line.ticket.mini.model.shard.ShardUser;
-import com.line.ticket.mini.model.shard.ShardUserRelation;
+import com.line.ticket.mini.model.shard.User;
+import com.line.ticket.mini.model.shard.UserRelation;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -30,14 +27,19 @@ class MiniApplicationTests {
     @Resource
     ShardUserRelationMapper shardUserRelationMapper;
 
+    @Resource
+    ShardRecordMapper shardRecordMapper;
+
     @Test
-    void contextLoads() {
-        ShardUser shardUser = new ShardUser();
+    void contextLoads() throws Exception {
+//        Handler.handle("D://test/multi");
+
+        User shardUser = new User();
         shardUser.setUserKey("user_user_key");
         shardUser.setUserValue("user_user_value");
         shardUser.setAreaCode(11);
         shardUserMapper.addUser(shardUser);
-        ShardUserRelation shardUserRelation = new ShardUserRelation();
+        UserRelation shardUserRelation = new UserRelation();
         shardUserRelation.setUserId(shardUser.getId());
         shardUserRelation.setUserAccount("qwwaq245553");
         shardUserRelation.setUserPassword("password_123");
@@ -66,6 +68,7 @@ class MiniApplicationTests {
 //        shardUserRelation.setUserPassword("password_qwwaq");
 //        shardUserRelationMapper.addUserRelation(shardUserRelation);
 //        System.out.println(shardUserRelation);
+
     }
 
 }

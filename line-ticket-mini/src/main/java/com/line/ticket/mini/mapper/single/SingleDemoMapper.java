@@ -1,8 +1,8 @@
 package com.line.ticket.mini.mapper.single;
 
-import com.line.ticket.mini.model.single.SingleDemo;
+import com.line.ticket.mini.model.single.Demo;
 import org.apache.ibatis.annotations.Param;
 
 public interface SingleDemoMapper {
-    SingleDemo querySingleDemo(@Param("id") Integer id);
+    Demo querySingleDemo(@Param("id") Integer id);
 }

@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
-public class SingleDemo implements Serializable {
+public class Demo implements Serializable {
     private static final long serialVersionUID = -894499789767930658L;
     private Integer id;
     private String name;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.line.ticket.mini.mapper.shard.ShardAreaMapper">
-    <resultMap id="shardAreaResultMap" type="com.line.ticket.mini.model.shard.ShardArea">
+    <resultMap id="shardAreaResultMap" type="com.line.ticket.mini.model.shard.Area">
         <result column="code" jdbcType="INTEGER" property="code" javaType="int"/>
         <result column="name" jdbcType="VARCHAR" property="name" javaType="string"/>
     </resultMap>
@@ -10,7 +10,7 @@
         select code, `name` from area
     </select>
 
-    <insert id="addArea" parameterType="com.line.ticket.mini.model.shard.ShardArea" useGeneratedKeys="true"
+    <insert id="addArea" parameterType="com.line.ticket.mini.model.shard.Area" useGeneratedKeys="true"
             keyColumn="id" keyProperty="id">
         insert into ds.area (code, `name`) values (#{code}, #{name});
     </insert>

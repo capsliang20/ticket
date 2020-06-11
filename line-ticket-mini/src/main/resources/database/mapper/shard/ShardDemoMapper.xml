@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.line.ticket.mini.mapper.shard.ShardDemoMapper">
-    <resultMap id="shardDemoResultMap" type="com.line.ticket.mini.model.shard.ShardDemo">
+    <resultMap id="shardDemoResultMap" type="com.line.ticket.mini.model.shard.Demo">
         <result column="id" jdbcType="BIGINT" property="id" javaType="long"/>
         <result column="name" jdbcType="VARCHAR" property="name" javaType="string"/>
         <result column="area_code" jdbcType="INTEGER" property="areaCode" javaType="int"/>
@@ -12,12 +12,12 @@
         select id, `name`, area_code, date_num from ds.demo_info where id =#{id} and area_code = #{areaCode}
     </select>
 
-    <insert id="addDemo" parameterType="com.line.ticket.mini.model.shard.ShardDemo" useGeneratedKeys="true"
+    <insert id="addDemo" parameterType="com.line.ticket.mini.model.shard.Demo" useGeneratedKeys="true"
             keyColumn="id" keyProperty="id">
         insert into ds.demo_info (`name`, area_code, date_num) value (#{name}, #{areaCode}, #{dateNum})
     </insert>
 
     <delete id="removeDemo">
-        delete from ds.demo_info where id=#{id} area_code = #{areaCode}
+        delete from ds.demo_info where id=#{id} and area_code = #{areaCode}
     </delete>
 </mapper>

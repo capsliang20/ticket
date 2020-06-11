@@ -5,7 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-public class ShardUserRelation implements Serializable {
+public class UserRelation implements Serializable {
 
     private static final long serialVersionUID = 2369066011659156904L;
 

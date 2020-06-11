@@ -40,29 +40,35 @@
         <property name="password" value="${shard3.datasource.password}"/>
     </bean>
 
-    <bean id="simpleStringPreciseShardingAlgorithm"
-          class="com.line.ticket.mini.config.shard.StringPreciseShardingAlgorithm"/>
-
-    <bean id="simpleLongPreciseShardingAlgorithm"
+    <bean id="longPreciseShardingAlgorithm"
           class="com.line.ticket.mini.config.shard.LongPreciseShardingAlgorithm"/>
+
+    <bean id="snowFlakePreciseShardingAlgorithm"
+          class="com.line.ticket.mini.config.shard.SnowFlakePreciseShardingAlgorithm"/>
 
     <sharding:inline-strategy id="demoDatabaseStrategy" sharding-column="area_code"
                               algorithm-expression="ds$->{area_code%2}"/>
 
     <sharding:standard-strategy id="demoTableStrategy" sharding-column="id"
-                                precise-algorithm-ref="simpleLongPreciseShardingAlgorithm"/>
+                                precise-algorithm-ref="snowFlakePreciseShardingAlgorithm"/>
 
     <sharding:inline-strategy id="userDatabaseStrategy" sharding-column="area_code"
                               algorithm-expression="ds$->{area_code%4}"/>
 
     <sharding:standard-strategy id="userTableStrategy" sharding-column="id"
-                                precise-algorithm-ref="simpleLongPreciseShardingAlgorithm"/>
+                                precise-algorithm-ref="snowFlakePreciseShardingAlgorithm"/>
 
     <sharding:inline-strategy id="userRelationDatabaseStrategy" sharding-column="area_code"
                               algorithm-expression="ds$->{area_code%4}"/>
 
     <sharding:standard-strategy id="userRelationTableStrategy" sharding-column="user_id"
-                                precise-algorithm-ref="simpleLongPreciseShardingAlgorithm"/>
+                                precise-algorithm-ref="snowFlakePreciseShardingAlgorithm"/>
+
+    <sharding:standard-strategy id="userRecordDatabaseStrategy" sharding-column="id"
+                                precise-algorithm-ref="longPreciseShardingAlgorithm"/>
+
+    <sharding:standard-strategy id="userRecordTableStrategy" sharding-column="id"
+                                precise-algorithm-ref="snowFlakePreciseShardingAlgorithm"/>
 
     <sharding:none-strategy id="noneStrategy"/>
 
@@ -79,6 +85,9 @@
                                      database-strategy-ref="userDatabaseStrategy"
                                      table-strategy-ref="userTableStrategy"
                                      key-generator-ref="idSnowGenerator"/>
+                <sharding:table-rule logic-table="user_record" actual-data-nodes="ds$->{0..3}.user_record$->{0..7}"
+                                     database-strategy-ref="userRecordDatabaseStrategy"
+                                     table-strategy-ref="userRecordTableStrategy"/>
                 <sharding:table-rule logic-table="user_relation" actual-data-nodes="ds$->{0..3}.user_relation$->{0..7}"
                                      database-strategy-ref="userRelationDatabaseStrategy"
                                      table-strategy-ref="userRelationTableStrategy"
@@ -98,7 +107,7 @@
 
     <bean id="shardSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="shardDataSource"/>
-        <property name="mapperLocations" value="/database/mapper/shard/*Mapper.xml"/>
+        <property name="mapperLocations" value="classpath:database/mapper/shard/*Mapper.xml"/>
     </bean>
 
     <bean id="shardSqlSession" class="org.mybatis.spring.SqlSessionTemplate">

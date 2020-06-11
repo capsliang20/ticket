@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ImportResource;
 
 @SpringBootApplication
-@ImportResource(locations = {"classpath:database/conf/shard-mybatis-conf.xml", "classpath:database/conf/single-mybatis-conf.xml"})
+@ImportResource(locations = {"classpath:application-context.xml"})
 public class MiniApplication {
 
     public static void main(String[] args) {

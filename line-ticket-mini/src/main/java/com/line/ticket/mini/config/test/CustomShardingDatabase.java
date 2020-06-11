@@ -1,4 +1,4 @@
-package com.line.ticket.mini.config;
+package com.line.ticket.mini.config.test;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import org.apache.shardingsphere.api.config.sharding.ShardingRuleConfiguration;

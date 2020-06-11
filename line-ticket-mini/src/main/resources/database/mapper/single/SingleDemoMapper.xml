@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.line.ticket.mini.mapper.single.SingleDemoMapper">
-    <resultMap id="singleDemoResultMap" type="com.line.ticket.mini.model.single.SingleDemo">
+    <resultMap id="singleDemoResultMap" type="com.line.ticket.mini.model.single.Demo">
         <id column="id" jdbcType="INTEGER" property="id" javaType="int"/>
         <result column="name" jdbcType="VARCHAR" property="name" javaType="string"/>
         <result column="phone_number" jdbcType="CHAR" property="phoneNumber" javaType="string"/>

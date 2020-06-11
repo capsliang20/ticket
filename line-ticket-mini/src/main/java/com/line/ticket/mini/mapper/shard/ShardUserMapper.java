@@ -1,17 +1,17 @@
 package com.line.ticket.mini.mapper.shard;
 
-import com.line.ticket.mini.model.shard.ShardFullUser;
-import com.line.ticket.mini.model.shard.ShardUser;
+import com.line.ticket.mini.model.shard.FullUser;
+import com.line.ticket.mini.model.shard.User;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 public interface ShardUserMapper {
-    List<ShardUser> queryUser(@Param("id") Long id, @Param("areaCode") Integer areaCode);
+    List<User> queryUser(@Param("id") Long id, @Param("areaCode") Integer areaCode);
 
-    List<ShardFullUser> queryAllUser();
+    List<FullUser> queryAllUser();
 
-    Integer addUser(ShardUser shardUser);
+    Integer addUser(User user);
 
     Integer removeUser(@Param("id") Long id, @Param("areaCode") Integer areaCode);
 }
