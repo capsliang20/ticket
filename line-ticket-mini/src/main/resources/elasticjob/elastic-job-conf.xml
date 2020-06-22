@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:reg="http://www.dangdang.com/schema/ddframe/reg"
+       xmlns:job="http://www.dangdang.com/schema/ddframe/job"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://www.dangdang.com/schema/ddframe/reg
+                        http://www.dangdang.com/schema/ddframe/reg/reg.xsd
+                        http://www.dangdang.com/schema/ddframe/job
+                        http://www.dangdang.com/schema/ddframe/job/job.xsd">
+    <reg:zookeeper id="regCenter" server-lists="39.108.225.165:2181,39.108.225.165:2182,39.108.225.165:2183"
+                   namespace="demo-job"
+                   base-sleep-time-milliseconds="1000" max-sleep-time-milliseconds="3000" max-retries="3"/>
+
+    <!--
+    Seconds Minutes Hours DayOfMonth Month DayOfWeek Year
+    Seconds Minutes Hours DayOfMonth Month DayOfWeek
+    Seconds     ,-*/        0-59
+    Minutes     ,-*/        0-59
+    Hours       ,-*/        0-23
+    DayOfMonth  ,-*/?LWC    0-31
+    Month       ,-*/        1-12
+    DayOfWeek   ,-*/?LC#    1-7 1Sun 2Mon
+
+    Year        ,-*/        1970-2099
+
+    *   匹配域内任意值
+    ?   也匹配域任何值
+    -   表示范围
+    /   表示起始时间开始触发,之后每隔固定时间触发一次
+    ,   列出枚举值
+    L   表示最后
+    W   有效工作日
+    LW  可连用
+    #
+     -->
+    <job:simple id="recordElasticJob" registry-center-ref="regCenter"
+                cron="0/30 * * * * ?"
+                class="com.line.ticket.mini.elastic.RecordElasticJob"
+                sharding-total-count="8"/>
+</beans>

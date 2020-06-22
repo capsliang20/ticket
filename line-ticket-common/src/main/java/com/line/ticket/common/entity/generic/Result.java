@@ -2,7 +2,6 @@ package com.line.ticket.common.entity.generic;
 
 import com.line.ticket.common.entity.constant.ResultConstant;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.ToString;
 
 import java.io.Serializable;
@@ -21,55 +20,35 @@ public class Result<T> implements Serializable {
 
     private String msg;
 
-    private Integer ret;
+    private int ret;
 
-    private Result(T data, String msg, Integer ret) {
+    private Result(T data, String msg, int ret) {
         this.data = data;
         this.msg = msg;
         this.ret = ret;
     }
 
-    private static final Result SIMPLE_SUCCESS_RESULT = new Result<>(null, ResultConstant.EMPTY_MSG, ResultConstant.COMMON_SUCCESS_CODE);
+    private static final Result SIMPLE_SUCCESS_RESULT = new Result<>(null, ResultConstant.EMPTY_MSG, ResultConstant.SUCCESS);
 
-    private static final Result SIMPLE_FAIL_RESULT = new Result<>(null, ResultConstant.EMPTY_MSG, ResultConstant.COMMON_FAIL_CODE);
+    private static final Result SIMPLE_FAIL_RESULT = new Result<>(null, ResultConstant.EMPTY_MSG, ResultConstant.DEFAULT_FAIL);
 
     public static Result success() {
         return SIMPLE_SUCCESS_RESULT;
     }
 
     public static <T> Result<T> success(T data) {
-        return new Result<>(data, ResultConstant.EMPTY_MSG, ResultConstant.COMMON_SUCCESS_CODE);
-    }
-
-    public static <T> Result<T> success(T data, String msg) {
-        return new Result<>(data, msg, ResultConstant.COMMON_SUCCESS_CODE);
+        return new Result<>(data, ResultConstant.EMPTY_MSG, ResultConstant.SUCCESS);
     }
 
     public static Result fail() {
         return SIMPLE_FAIL_RESULT;
     }
 
-    public static <T> Result<T> fail(T data) {
-        return new Result<>(data, ResultConstant.EMPTY_MSG, ResultConstant.COMMON_FAIL_CODE);
-    }
-
     public static <T> Result<T> fail(String msg) {
-        return new Result<>(null, msg, ResultConstant.COMMON_FAIL_CODE);
+        return new Result<>(null, msg, ResultConstant.DEFAULT_FAIL);
     }
 
-    public static <T> Result<T> fail(T data, @NonNull Integer ret) {
-        return new Result<>(data, ResultConstant.EMPTY_MSG, ret);
-    }
-
-    public static <T> Result<T> fail(String msg, @NonNull Integer ret) {
+    public static <T> Result<T> fail(String msg, int ret) {
         return new Result<>(null, msg, ret);
-    }
-
-    public static <T> Result<T> fail(T data, String msg) {
-        return new Result<>(data, msg, ResultConstant.COMMON_FAIL_CODE);
-    }
-
-    public static <T> Result<T> fail(T data, String msg, @NonNull Integer ret) {
-        return new Result<>(data, msg, ret);
     }
 }
