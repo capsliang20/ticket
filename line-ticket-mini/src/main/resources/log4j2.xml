@@ -6,7 +6,15 @@
                 <Pattern>[%d{yyyy-MM-dd HH:mm:ss}] [%p] [%t] [%c]: %m%n</Pattern>
             </PatternLayout>
         </Console>
+
+        <File name="ConsoleFile" fileName="line-ticket-mini/logs/console-file.log" append="false">
+            <PatternLayout>
+                <Pattern>[%d{yyyy-MM-dd HH:mm:ss}] [%p] [%t] [%c]: %m%n</Pattern>
+            </PatternLayout>
+        </File>
+
         <Async name="Async">
+            <AppenderRef ref="ConsoleFile"/>
             <AppenderRef ref="Console"/>
         </Async>
     </Appenders>
@@ -15,5 +23,8 @@
         <Root level="INFO">
             <AppenderRef ref="Console"/>
         </Root>
+        <Logger name="com.line.ticket.log.logtest" level="INFO" additivity="false">
+            <AppenderRef ref="Async"/>
+        </Logger>
     </Loggers>
 </Configuration>

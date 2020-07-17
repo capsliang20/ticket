@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn" name="video-toutiao-service" packages="">
+    <Appenders>
+        <File name="RollingFile" append="false"
+              fileName="${sys:application.home}/logs/video-toutiao-service_${env:paas_port_1}.log">
+            <PatternLayout>
+                <Pattern>[%d{yyyy-MM-dd
+                    HH:mm:ss.SSS}]\\u0001%5p\\u0001%t\\u0001%c{1.}.%M(%F:%L)\\u0001%X{hostName}\\u0001%X{appId}\\u0001%X{localAddrAndPort}\\u0001%X{traceId}\\u0001%m%n
+                </Pattern>
+            </PatternLayout>
+        </File>
+
+        <Http_oppo name="Snake">
+            <Filters>
+                <ThresholdFilter level="WARN" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+        </Http_oppo>
+
+        <File name="gather_access_log_appender" append="false"
+              fileName="${sys:application.home}/logs/gather_access_log_${env:paas_port_1}.log">
+            <PatternLayout>
+                <Pattern>%m%n</Pattern>
+            </PatternLayout>
+        </File>
+
+        <File name="dubbo_access_log_appender" append="false"
+              fileName="${sys:application.home}/logs/dubbo_access_log_${env:paas_port_1}.log">
+            <PatternLayout>
+                <Pattern>%m%n</Pattern>
+            </PatternLayout>
+        </File>
+
+        <File name="sql_access_log_appender" append="false"
+              fileName="${sys:application.home}/logs/sql_access_log_${env:paas_port_1}.log">
+            <PatternLayout>
+                <Pattern>%m%n</Pattern>
+            </PatternLayout>
+        </File>
+
+        <File name="RocketmqClientAppender" append="false"
+              fileName="${sys:application.home}/logs/rocketmq_client_${env:paas_port_1}.log">
+            <PatternLayout>
+                <Pattern>%5p [%d] [%t] %c{1.}.%M(%F:%L) - %m%n</Pattern>
+            </PatternLayout>
+        </File>
+
+        <File name="httpClient_access_log_appender" append="false"
+              fileName="${sys:application.home}/logs/httpClient_access_log_${env:paas_port_1}.log">
+            <PatternLayout>
+                <Pattern>%m%n</Pattern>
+            </PatternLayout>
+        </File>
+
+        <File name="binlog_appender" append="false"
+              fileName="${sys:application.home}/logs/binlog_${env:paas_port_1}.log">
+            <PatternLayout>
+                <Pattern>[%d] %m%n</Pattern>
+            </PatternLayout>
+        </File>
+    </Appenders>
+
+    <Loggers>
+        <Root level="DEBUG">
+            <AppenderRef ref="RollingFile"/>
+            <AppenderRef ref="Snake"/>
+        </Root>
+        <logger name="gather_access_log" additivity="false" level="INFO" includeLocation="true">
+            <AppenderRef ref="gather_access_log_appender"/>
+        </logger>
+        <logger name="dubbo_access_log" additivity="false" level="INFO" includeLocation="true">
+            <AppenderRef ref="dubbo_access_log_appender"/>
+        </logger>
+        <logger name="sql_access_log" additivity="false" level="DEBUG" includeLocation="true">
+            <AppenderRef ref="sql_access_log_appender"/>
+        </logger>
+        <logger name="RocketmqClient" additivity="false" level="WARN" includeLocation="true">
+            <AppenderRef ref="RocketmqClientAppender"/>
+        </logger>
+        <logger name="redis.clients.jedis" additivity="false" level="DEBUG" includeLocation="true">
+            <AppenderRef ref="RollingFile"/>
+        </logger>
+        <logger name="httpClient_access_log" additivity="false" level="INFO" includeLocation="true">
+            <AppenderRef ref="httpClient_access_log_appender"/>
+        </logger>
+        <logger name="binlog" additivity="false" level="DEBUG" includeLocation="true">
+            <AppenderRef ref="binlog_appender"/>
+        </logger>
+    </Loggers>
+</Configuration>

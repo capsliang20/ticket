@@ -24,8 +24,9 @@ public final class Pair<K, V> implements Map.Entry<K, V>, Serializable {
     }
 
     @Override
-    public V setValue(V value) {
+    public V setValue(V update) {
         V oldValue = value;
+        this.value = update;
         return oldValue;
     }
 
