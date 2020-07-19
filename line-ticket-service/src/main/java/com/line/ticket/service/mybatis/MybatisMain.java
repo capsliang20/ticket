@@ -14,7 +14,7 @@ import java.io.InputStream;
 @Slf4j
 public class MybatisMain {
     public static void main(String[] args) throws IOException {
-        String resource = "mybatis-conf.xml";
+        String resource = "mybatis-factory.xml";
         InputStream inputStream = Resources.getResourceAsStream(resource);
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {

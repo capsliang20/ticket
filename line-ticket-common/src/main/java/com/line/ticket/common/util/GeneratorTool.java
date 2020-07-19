@@ -3,9 +3,6 @@ package com.line.ticket.common.util;
 import java.util.Random;
 
 public class GeneratorTool {
-    public static void main(String[] args) {
-    }
-
     /**
      * char[0]-char[9] 为 '0'-'9'
      * char[10]-char[35] 为'a'-'z'

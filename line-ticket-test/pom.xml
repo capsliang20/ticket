@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.line.ticket</groupId>
-    <artifactId>line-ticket-log</artifactId>
+    <artifactId>line-ticket-test</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>line-ticket-log</name>
     <description>Demo project for Spring Boot</description>

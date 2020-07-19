@@ -13,7 +13,6 @@ public class InterceptorConfig extends WebMvcConfigurationSupport {
         this.masterInterceptor = masterInterceptor;
     }
 
-
     @Override
     protected void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(masterInterceptor).addPathPatterns("/**");

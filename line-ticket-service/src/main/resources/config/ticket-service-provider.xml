@@ -13,7 +13,6 @@
 
     <dubbo:protocol name="dubbo" port="20800"/>
 
-    <bean id="demoServiceImpl" class="com.line.ticket.service.impl.DemoServiceImpl"/>
     <dubbo:service interface="com.line.ticket.common.api.DemoService" ref="demoServiceImpl"/>
 
 <!--    <dubbo:service interface=""/> 用于暴露一个服务-->

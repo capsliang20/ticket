@@ -8,7 +8,5 @@ public class Main {
         System.out.println(ArrayUtils.isEmpty(strings));
         String[] strings1=new String[0];
         System.out.println(ArrayUtils.isEmpty(strings1));
-
-
     }
 }

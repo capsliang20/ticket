@@ -1,25 +1,23 @@
 package com.line.ticket.common.util;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class JSON {
-    private static final ObjectMapper objectMapper=new ObjectMapper();
+    private static final ObjectMapper objectMapper = new ObjectMapper();
+
     static {
         objectMapper.registerModule(new JavaTimeModule());
     }
 
-    public static String toJSONString(Object value){
+    public static String toJSONString(Object value) {
         try {
             return objectMapper.writeValueAsString(value);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            log.warn("toJSONString error. value:{}", value, e);
+            return "";
         }
-        return "JsonProcessingException";
-    }
-
-    public static ObjectMapper objectMapper(){
-        return objectMapper;
     }
 }
