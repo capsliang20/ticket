@@ -1,11 +1,12 @@
 package com.line.ticket.common.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class JSON {
+public class JsonTool {
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
     static {
@@ -20,4 +21,6 @@ public class JSON {
             return "";
         }
     }
+
+
 }

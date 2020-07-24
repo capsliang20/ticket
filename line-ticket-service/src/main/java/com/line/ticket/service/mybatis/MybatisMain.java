@@ -1,6 +1,6 @@
 package com.line.ticket.service.mybatis;
 
-import com.line.ticket.common.util.JSON;
+import com.line.ticket.common.util.JsonTool;
 import com.line.ticket.service.mapper.DemoMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.io.Resources;
@@ -19,7 +19,7 @@ public class MybatisMain {
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
             DemoMapper demoMapper = sqlSession.getMapper(DemoMapper.class);
-            log.info("demoMapper:{}",JSON.toJSONString(demoMapper.selectDemo(1)));
+            log.info("demoMapper:{}", JsonTool.toJSONString(demoMapper.selectDemo(1)));
         }
         log.info("result");
     }

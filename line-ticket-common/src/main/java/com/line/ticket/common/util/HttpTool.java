@@ -22,7 +22,7 @@ public class HttpTool {
         log.info("url:{}", url);
         HttpClient httpClient = HttpClients.createMinimal(clientManager);
         HttpPost post = new HttpPost(url);
-        StringEntity entity = new StringEntity(JSON.toJSONString(params), StandardCharsets.UTF_8);
+        StringEntity entity = new StringEntity(JsonTool.toJSONString(params), StandardCharsets.UTF_8);
         entity.setContentType(ContentType.APPLICATION_JSON.toString());
         post.setEntity(entity);
         try {

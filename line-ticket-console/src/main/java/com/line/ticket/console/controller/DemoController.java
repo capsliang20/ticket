@@ -3,15 +3,16 @@ package com.line.ticket.console.controller;
 import com.line.ticket.common.api.DemoService;
 import com.line.ticket.common.entity.Demo;
 import com.line.ticket.common.entity.generic.Result;
+import com.line.ticket.common.entity.request.DemoListRequest;
+import com.line.ticket.common.entity.request.DemoRequest;
+import com.line.ticket.common.entity.request.TicketRequest;
+import com.line.ticket.common.entity.service.Ticket;
 import com.line.ticket.common.util.HttpTool;
-import com.line.ticket.common.util.JSON;
+import com.line.ticket.common.util.JsonTool;
 import io.lettuce.core.dynamic.annotation.Param;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.collections4.map.HashedMap;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
@@ -30,7 +31,7 @@ public class DemoController {
     DemoService demoService;
 
     @RequestMapping(value = "/selectDemo", method = RequestMethod.GET)
-    public Result demo(@Param("id") Integer id) throws IOException {
+    public Result demo(@Param("id") Integer id){
         System.out.println("invoke");
         HttpTool.get("www.baidu.com");
         log.info("xxx");
@@ -42,9 +43,9 @@ public class DemoController {
     }
 
     @RequestMapping(value = "bodyTest")
-    public Result<Demo> bodyTest(@RequestBody Demo demo) {
-        System.out.println(JSON.toJSONString(demo));
-        return Result.success(demo);
+    public Result<List<Demo>> bodyTest(@RequestBody List<Demo> demoList) {
+        System.out.println(JsonTool.toJSONString(demoList));
+        return Result.success(demoList);
     }
 
     @RequestMapping(value = "/test")
@@ -74,6 +75,33 @@ public class DemoController {
             e.printStackTrace();
         }
 
-        return JSON.toJSONString("");
+        return JsonTool.toJSONString("");
+    }
+
+    @GetMapping("/demoGetThreeParams")
+    public Result<Object> demoGetThreeParams(Integer id, String key, String value) {
+        log.info("demoGetThreeParams id:{}, key:{}, value:{}", id, key, value);
+        return Result.success();
+    }
+
+    @GetMapping("/demoGet")
+    public Result<Demo> demoGet(DemoRequest demoRequest) {
+        log.info("demoRequest:{}", JsonTool.toJSONString(demoRequest));
+        Demo demo = new Demo();
+        demo.setId(demoRequest.getId());
+        demo.setName(demoRequest.getName());
+        return Result.success(demo);
+    }
+
+    @PostMapping("/ticketPost")
+    public Result<Ticket> ticketPost(TicketRequest ticketRequest) {
+        log.info("ticketPost:{}", JsonTool.toJSONString(ticketRequest));
+        return Result.success(ticketRequest.getBody());
+    }
+
+    @PostMapping("demoListPost")
+    public Result<List<Demo>> demoListPost(DemoListRequest demoListRequest) {
+        log.info("demoListPost:{}", JsonTool.toJSONString(demoListRequest));
+        return Result.success(demoListRequest.getBody());
     }
 }
