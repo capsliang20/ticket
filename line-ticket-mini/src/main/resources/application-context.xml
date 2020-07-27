@@ -5,5 +5,4 @@
 
     <import resource="classpath:database/conf/shard-mybatis-conf.xml"/>
     <import resource="classpath:database/conf/single-mybatis-conf.xml"/>
-    <import resource="classpath:elasticjob/elastic-job-conf.xml"/>
 </beans>

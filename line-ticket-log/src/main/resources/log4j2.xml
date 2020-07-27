@@ -3,35 +3,41 @@
     <Appenders>
         <Console name="Console" target="SYSTEM_OUT">
             <PatternLayout>
-                <Pattern>%d %p [%t] %logger - %m%n</Pattern>
+                <Pattern>[%d{yyyy-MM-dd HH:mm:ss}] [%p] [%t] [%c]: %m%n</Pattern>
             </PatternLayout>
         </Console>
-        <File name="ConsoleFile" fileName="line-ticket-log/logs/ConsoleFile.log" append="false">
+
+        <File name="ConsoleFile" fileName="line-ticket-log/logs/console-file.log" append="false">
             <PatternLayout>
-                <Pattern>%d %p [%t] %logger - %m%n</Pattern>
+                <Pattern>[%d{yyyy-MM-dd HH:mm:ss}] [%p] [%t] [%c]: %m%n</Pattern>
             </PatternLayout>
         </File>
-        <RollingFile name="RollingFile" fileName="line-ticket-log/logs/RollingFile.log" append="true"
-                     filePattern="line-ticket-log/logs/$${date:yyyy-MM-dd}/rollApp-%d{yyyy-MM-dd}_%i.log.gz">
-            <PatternLayout>
-                <Pattern>%d %p [%t] %logger - %m%n</Pattern>
-            </PatternLayout>
-            <Policies>
-                <OnStartupTriggeringPolicy/>
-                <TimeBasedTriggeringPolicy interval="12" modulate="true"/>
-                <SizeBasedTriggeringPolicy  size="250 KB"/>
-            </Policies>
-            <DefaultRolloverStrategy max="10"/>
-        </RollingFile>
+
+        <!--        <RollingFile name="RollingFile" fileName="line-ticket-log/logs/RollingFile.log" append="true"-->
+        <!--                     filePattern="line-ticket-log/logs/$${date:yyyy-MM-dd}/rollApp-%d{yyyy-MM-dd}_%i.log.gz">-->
+        <!--            <PatternLayout>-->
+        <!--                <Pattern>%d %p [%t] %logger - %m%n</Pattern>-->
+        <!--            </PatternLayout>-->
+        <!--            <Policies>-->
+        <!--                <OnStartupTriggeringPolicy/>-->
+        <!--                <TimeBasedTriggeringPolicy interval="12" modulate="true"/>-->
+        <!--                <SizeBasedTriggeringPolicy  size="250 KB"/>-->
+        <!--            </Policies>-->
+        <!--            <DefaultRolloverStrategy max="10"/>-->
+        <!--        </RollingFile>-->
+
         <Async name="Async">
             <AppenderRef ref="ConsoleFile"/>
             <AppenderRef ref="Console"/>
-            <AppenderRef ref="RollingFile"/>
         </Async>
     </Appenders>
+
     <Loggers>
         <Root level="INFO">
-            <AppenderRef ref="Async"/>
+            <AppenderRef ref="Console"/>
         </Root>
+        <Logger name="com.line.ticket.log.logtest" level="INFO" additivity="false">
+            <AppenderRef ref="Async"/>
+        </Logger>
     </Loggers>
 </Configuration>

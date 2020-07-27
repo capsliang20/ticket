@@ -16,11 +16,11 @@ import java.io.Serializable;
 public class Result<T> implements Serializable {
     private static final long serialVersionUID = -380872328153407227L;
 
-    private T data;
+    private final T data;
 
-    private String msg;
+    private final String msg;
 
-    private int ret;
+    private final int ret;
 
     private Result(T data, String msg, int ret) {
         this.data = data;

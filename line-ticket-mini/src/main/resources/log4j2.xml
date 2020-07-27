@@ -1,27 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="warn" name="line-ticket-log" packages="">
     <Appenders>
-        <Console name="console" target="SYSTEM_OUT">
+        <Console name="Console" target="SYSTEM_OUT">
             <PatternLayout>
                 <Pattern>[%d{yyyy-MM-dd HH:mm:ss}] [%p] [%t] [%c]: %m%n</Pattern>
             </PatternLayout>
         </Console>
 
-        <File name="consoleFile" fileName="logs/console-file.log" append="true">
+        <File name="ConsoleFile" fileName="line-ticket-mini/logs/console-file.log" append="false">
             <PatternLayout>
                 <Pattern>[%d{yyyy-MM-dd HH:mm:ss}] [%p] [%t] [%c]: %m%n</Pattern>
             </PatternLayout>
         </File>
 
-        <Async name="async">
-            <AppenderRef ref="console"/>
+        <Async name="Async">
+            <AppenderRef ref="ConsoleFile"/>
+            <AppenderRef ref="Console"/>
         </Async>
     </Appenders>
 
     <Loggers>
         <Root level="INFO">
-            <AppenderRef ref="async"/>
-            <AppenderRef ref="consoleFile"/>
+            <AppenderRef ref="Console"/>
         </Root>
+        <Logger name="com.line.ticket.log.logtest" level="INFO" additivity="false">
+            <AppenderRef ref="Async"/>
+        </Logger>
     </Loggers>
 </Configuration>

@@ -1,13 +1,17 @@
 package com.line.ticket.common.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Demo implements Serializable {
     private static final long serialVersionUID = -894499789767930658L;
     private Integer id;

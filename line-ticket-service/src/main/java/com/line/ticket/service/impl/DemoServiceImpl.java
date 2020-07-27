@@ -3,6 +3,7 @@ package com.line.ticket.service.impl;
 import com.line.ticket.common.api.DemoService;
 import com.line.ticket.common.entity.Demo;
 import com.line.ticket.service.mapper.DemoMapper;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +23,7 @@ public class DemoServiceImpl implements DemoService {
     }
 
     @Override
+    @CacheEvict(cacheNames = {"demo"}, key = "#id")
     public boolean deleteDemo(Integer id) {
         return demoMapper.deleteDemo(id) == 1;
     }

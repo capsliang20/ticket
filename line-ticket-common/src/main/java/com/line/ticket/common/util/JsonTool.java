@@ -1,11 +1,12 @@
-package com.line.ticket.mini.util;
+package com.line.ticket.common.util;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import org.apache.http.entity.ContentType;
+import lombok.extern.slf4j.Slf4j;
 
-public class JSON {
+@Slf4j
+public class JsonTool {
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
     static {
@@ -15,13 +16,11 @@ public class JSON {
     public static String toJSONString(Object value) {
         try {
             return objectMapper.writeValueAsString(value);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            log.warn("toJSONString error. value:{}", value, e);
+            return "";
         }
-        return "JsonProcessingException";
     }
 
-    public static void main(String[] args) {
-        System.out.println(ContentType.APPLICATION_JSON.getMimeType());
-    }
+
 }
