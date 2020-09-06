@@ -14,5 +14,17 @@ public class TicketRequest extends AbstractBodyRequest<Ticket> {
     private Integer id;
 
     private String account;
+
+    private Ticket ticket;
+
+    @Override
+    public Ticket getBody() {
+        return ticket;
+    }
+
+    @Override
+    public void setBody(Ticket body) {
+        this.ticket = body;
+    }
 }
 

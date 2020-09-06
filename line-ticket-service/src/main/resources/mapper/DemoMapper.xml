@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.line.ticket.service.mapper.DemoMapper">
-    <resultMap id="demoResultMap" type="com.line.ticket.common.entity.Demo">
+    <resultMap id="demoResultMap" type="com.line.ticket.common.entity.service.Demo">
         <id column="id" jdbcType="INTEGER" property="id" javaType="int"/>
         <result column="name" jdbcType="VARCHAR" property="name" javaType="string"/>
         <result column="phone_number" jdbcType="CHAR" property="phoneNumber" javaType="string"/>
@@ -21,13 +21,13 @@
         from demo where id=#{id}
     </select>
 
-    <update id="updateDemo" parameterType="com.line.ticket.common.entity.Demo">
+    <update id="updateDemo" parameterType="com.line.ticket.common.entity.service.Demo">
         update demo set name=#{name},phone_number=#{phoneNumber},sex=#{sex},
         birthday=#{birthday},last_update_time=#{lastUpdateTime} where id=#{id}
     </update>
 
     <insert id="insertDemo" useGeneratedKeys="true" keyColumn="id" keyProperty="id"
-            parameterType="com.line.ticket.common.entity.Demo">
+            parameterType="com.line.ticket.common.entity.service.Demo">
         insert into demo (<include refid="demo_column"/>) value
         (#{name},#{phoneNumber},#{sex},#{birthday},#{lastUpdateTime})
     </insert>

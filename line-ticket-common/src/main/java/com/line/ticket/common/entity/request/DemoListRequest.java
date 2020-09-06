@@ -1,6 +1,6 @@
 package com.line.ticket.common.entity.request;
 
-import com.line.ticket.common.entity.Demo;
+import com.line.ticket.common.entity.service.Demo;
 import com.line.ticket.common.entity.generic.AbstractBodyRequest;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -16,4 +16,15 @@ public class DemoListRequest extends AbstractBodyRequest<List<Demo>> {
 
     private String key;
 
+    private List<Demo> demoList;
+
+    @Override
+    public List<Demo> getBody() {
+        return demoList;
+    }
+
+    @Override
+    public void setBody(List<Demo> body) {
+        this.demoList = body;
+    }
 }

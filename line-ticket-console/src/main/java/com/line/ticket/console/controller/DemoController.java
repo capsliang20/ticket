@@ -1,13 +1,12 @@
 package com.line.ticket.console.controller;
 
 import com.line.ticket.common.api.DemoService;
-import com.line.ticket.common.entity.Demo;
 import com.line.ticket.common.entity.generic.Result;
 import com.line.ticket.common.entity.request.DemoListRequest;
 import com.line.ticket.common.entity.request.DemoRequest;
 import com.line.ticket.common.entity.request.TicketRequest;
+import com.line.ticket.common.entity.service.Demo;
 import com.line.ticket.common.entity.service.Ticket;
-import com.line.ticket.common.util.HttpTool;
 import com.line.ticket.common.util.JsonTool;
 import io.lettuce.core.dynamic.annotation.Param;
 import lombok.extern.log4j.Log4j2;
@@ -33,7 +32,6 @@ public class DemoController {
     @RequestMapping(value = "/selectDemo", method = RequestMethod.GET)
     public Result demo(@Param("id") Integer id){
         System.out.println("invoke");
-        HttpTool.get("www.baidu.com");
         log.info("xxx");
         Demo result = demoService.selectDemo(id);
         Demo result2 = demoService.selectDemo(id);
@@ -85,12 +83,9 @@ public class DemoController {
     }
 
     @GetMapping("/demoGet")
-    public Result<Demo> demoGet(DemoRequest demoRequest) {
+    public Result<DemoRequest> demoGet(DemoRequest demoRequest) {
         log.info("demoRequest:{}", JsonTool.toJSONString(demoRequest));
-        Demo demo = new Demo();
-        demo.setId(demoRequest.getId());
-        demo.setName(demoRequest.getName());
-        return Result.success(demo);
+        return Result.success(demoRequest);
     }
 
     @PostMapping("/ticketPost")
@@ -101,7 +96,7 @@ public class DemoController {
 
     @PostMapping("demoListPost")
     public Result<List<Demo>> demoListPost(DemoListRequest demoListRequest) {
-        log.info("demoListPost:{}", JsonTool.toJSONString(demoListRequest));
+        log.info("demoListPost:{}", demoListRequest);
         return Result.success(demoListRequest.getBody());
     }
 }
