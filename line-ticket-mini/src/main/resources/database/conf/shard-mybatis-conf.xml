@@ -10,7 +10,7 @@
        http://shardingsphere.apache.org/schema/shardingsphere/sharding
        http://shardingsphere.apache.org/schema/shardingsphere/sharding/sharding.xsd">
 
-    <context:property-placeholder location="/properties/jdbc.properties"/>
+    <context:property-placeholder location="classpath:properties/jdbc.properties"/>
 
     <bean id="ds0" class="com.alibaba.druid.pool.DruidDataSource">
         <property name="driverClassName" value="${shard0.datasource.driver-class-name}"/>
