@@ -25,7 +25,7 @@ public class DemoController {
     public Result poResult(@RequestBody Map<String, String> map) {
         System.out.println(JSON.toJSONString(map));
         Record record = new Record();
-        record.setId(11l);
+        record.setId(11L);
         record.setType(1);
         record.setContent("content");
         record.setDateNum(20200611);
