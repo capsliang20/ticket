@@ -1,11 +1,11 @@
 package com.line.ticket.console.controller;
 
 import com.line.ticket.common.api.DemoService;
-import com.line.ticket.common.entity.Demo;
 import com.line.ticket.common.entity.generic.Result;
 import com.line.ticket.common.entity.request.DemoListRequest;
 import com.line.ticket.common.entity.request.DemoRequest;
 import com.line.ticket.common.entity.request.TicketRequest;
+import com.line.ticket.common.entity.service.Demo;
 import com.line.ticket.common.entity.service.Ticket;
 import com.line.ticket.common.util.JsonTool;
 import io.lettuce.core.dynamic.annotation.Param;

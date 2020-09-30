@@ -1,7 +1,7 @@
 package com.line.ticket.service.impl;
 
 import com.line.ticket.common.api.DemoService;
-import com.line.ticket.common.entity.Demo;
+import com.line.ticket.common.entity.service.Demo;
 import com.line.ticket.service.mapper.DemoMapper;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;

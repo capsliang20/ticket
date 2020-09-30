@@ -1,6 +1,6 @@
 package com.line.ticket.service.mapper;
 
-import com.line.ticket.common.entity.Demo;
+import com.line.ticket.common.entity.service.Demo;
 import org.apache.ibatis.annotations.Param;
 
 public interface DemoMapper {
