@@ -21,6 +21,15 @@ public class JSON {
         return "JsonProcessingException";
     }
 
+    public static <T> T readValue(String content, Class<T> valueType) {
+        try {
+            return objectMapper.readValue(content, valueType);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println(ContentType.APPLICATION_JSON.getMimeType());
     }

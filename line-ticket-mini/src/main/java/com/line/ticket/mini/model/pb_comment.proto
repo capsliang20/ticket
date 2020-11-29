@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+option java_package = "com.line.ticket.mini.model";
+option java_outer_classname = "PbComment";
+
+message Comment {
+  string commentContent = 1;
+  int32 replyCount = 2;
+  bool status = 3;
+}

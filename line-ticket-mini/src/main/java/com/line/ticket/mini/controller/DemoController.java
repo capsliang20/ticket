@@ -1,5 +1,9 @@
 package com.line.ticket.mini.controller;
 
+import com.google.protobuf.InvalidProtocolBufferException;
+import com.google.protobuf.util.JsonFormat;
+import com.line.ticket.mini.model.Comment;
+import com.line.ticket.mini.model.PbComment;
 import com.line.ticket.mini.model.Result;
 import com.line.ticket.mini.model.shard.Area;
 import com.line.ticket.mini.model.shard.Record;
@@ -63,5 +67,12 @@ public class DemoController {
             Thread.sleep(1000);
         }
         return Result.success(sendHistory);
+    }
+
+    @PostMapping("proto")
+    public byte[] comment(@RequestBody Comment comment) throws InvalidProtocolBufferException {
+        PbComment.Comment.Builder builder = PbComment.Comment.newBuilder();
+        JsonFormat.parser().merge(JSON.toJSONString(comment), builder);
+        return builder.build().toByteArray();
     }
 }
